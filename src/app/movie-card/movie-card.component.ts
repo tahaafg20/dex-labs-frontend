@@ -50,38 +50,48 @@ export class MovieCardComponent implements OnInit {
   ngOnInit(): void {
     // First approach: Getting the dataset from the file locally
 
+    // Set a counter to keep track of the number of objects (Helps us do the paginating)
+    var counter = 1;
+
     // iterate through all the objects gotten from the local json file and assign each as a custom model which is created (Movie) to keep things consistant;
-    // movies.map((movie: {}) => {
+    movies.map((movie: {}) => {
 
-    // Create the object with required fields
-    // let movieObject = { Title: movie["title"], PosterPath: movie["poster_path"], Id: movie["id"], ReleaseDate: movie["release_date"] } as Movie
+      // Create the object with required fields
+      let movieObject = { Title: movie["title"], PosterPath: movie["poster_path"], Id: movie["id"], ReleaseDate: movie["release_date"], PagerItem: counter } as Movie
 
-    // Push the objects to an array of movies to use the array on the interface.
-    // this.movies.push(movieObject);
-    // })
+      // Push the objects to an array of movies to use the array on the interface.
+      this.allMovies.push(movieObject);
+
+      // Increase the number of counter after every run of the loop.
+      counter = counter + 1;
+
+    })
+
+    // Used for pagination
+    this.displayActivePage(1);
 
 
     // Second approach: Getting the dataset from rails api
 
-    this.http.get<{}[]>("http://localhost:3000/movies").subscribe(data => {
+    // this.http.get<{}[]>("http://localhost:3000/movies").subscribe(data => {
 
       // Set a counter to keep track of the number of objects (Helps us do the paginating)
-      var counter = 1;
+      // var counter = 1;
 
       // iterate through all the objects gotten from rails Api call and assign each as a custom model which is created (Movie) to keep things consistant;
-      data.map((movie) => {
+      // data.map((movie) => {
 
         // Create the object with required fields
-        let movieObject = { Title: movie["title"], PosterPath: movie["poster_path"], Id: movie["id"], ReleaseDate: movie["release_date"], PagerItem: counter } as Movie
+        // let movieObject = { Title: movie["title"], PosterPath: movie["poster_path"], Id: movie["id"], ReleaseDate: movie["release_date"], PagerItem: counter } as Movie
 
         // Push the objects to the array of movies based on the current page to use and display it on the interface.
-        this.allMovies.push(movieObject);
+        // this.allMovies.push(movieObject);
 
         // Increase the number of counter after every run of the loop.
-        counter =+ 1
-      })
-      this.displayActivePage(1);
-    })
+        // counter = + 1
+      // })
+      // this.displayActivePage(1);
+    // })
   }
 
 }
