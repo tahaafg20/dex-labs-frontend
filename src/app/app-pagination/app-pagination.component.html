@@ -1,0 +1,5 @@
+<div class="pagination">
+    <span style="padding: 10px;">Page</span><span style="padding: 10px;" *ngFor="let item of pages"
+        [ngClass]="{'activated': activePage === item}" (click)="onClickPage(item)"><a style="color:#acb6c5; text-decoration: none;" id="link-page"
+            href="javascript:void(0);" [ngStyle]="{'color': activePage === item ? 'black' : '#acb6c5'}">{{item}}</a></span>
+</div>

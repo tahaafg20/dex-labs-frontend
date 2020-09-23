@@ -1,0 +1,25 @@
+<section  class="body">
+	<div class="movies-container">
+
+		<div class="header">
+			<div class="header-title">
+				Top Rated Movies
+			</div>
+		</div>
+		<div class="main-container">
+			<div class="card" *ngFor="let movie of movies">
+				<div class="poster">
+					<img [src]="movie.PosterPath" class="poster-img">
+				</div>
+				<div class="text-section">
+					<span class="title">{{movie.Title}}</span>
+					<span class="release-date">{{movie.ReleaseDate}}</span>
+				</div>
+			</div>
+			
+		</div>	
+		<div class="pagination">
+			<app-pagination [totalRecords]="20" [recordsPerPage]="10" (onPageChange)="displayActivePage($event)"></app-pagination> 
+		</div>
+	</div>
+</section>
